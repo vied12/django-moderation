@@ -26,6 +26,10 @@ def import_moderator(app):
     import imp
 
     try:
+        paths = app.split('.')
+        # if .apps.AppConfig style...
+        if paths[-1][0].isupper():
+            app = '.'.join(paths[0:-1])
         app_path = import_module(app).__path__
     except AttributeError:
         return None

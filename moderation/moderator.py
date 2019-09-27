@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import Group
-from django.contrib.sites.models import Site
+# from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.fields import BooleanField
 from django.db.models.manager import Manager
@@ -133,7 +133,7 @@ class GenericModerator(object):
         context = {
             'moderated_object': content_object.moderated_object,
             'content_object': content_object,
-            'site': Site.objects.get_current(),
+            # 'site': Site.objects.get_current(),
             'content_type': content_object.moderated_object.content_type}
 
         if extra_context:
@@ -150,7 +150,7 @@ class GenericModerator(object):
 
     def send_many(self, queryset, subject_template, message_template,
                   extra_context=None):
-        site = Site.objects.get_current()
+        # site = Site.objects.get_current()
 
         ctx = extra_context if extra_context else {}
 
@@ -159,7 +159,7 @@ class GenericModerator(object):
                 subject_template, ctx.update({
                     'moderated_object': mobj,
                     'content_object': mobj.content_object,
-                    'site': site,
+                    # 'site': site,
                     'content_type': mobj.content_type,
                     'user': mobj.changed_by,
                 })),
@@ -167,7 +167,7 @@ class GenericModerator(object):
                 message_template, ctx.update({
                     'moderated_object': mobj,
                     'content_object': mobj.content_object,
-                    'site': site,
+                    # 'site': site,
                     'content_type': mobj.content_type,
                     'user': mobj.changed_by,
                 })),
